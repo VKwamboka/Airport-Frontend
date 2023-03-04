@@ -14,6 +14,7 @@ export class AuthenticationService {
   }
 
   loginUser(user:LoginUser):Observable<LoginSuccess>{
+    console.log(user)
     return this.http.post<LoginSuccess>('http://localhost:4000/auth/login',user)
   }
 

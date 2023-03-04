@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { ErrorComponent } from 'src/app/error/error.component';
 import { Store } from '@ngrx/store';
 import { login, logout } from '../authAction';
+import { AuthState } from '../authState';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +19,10 @@ import { login, logout } from '../authAction';
 })
 export class LoginComponent implements OnInit {
   form!:FormGroup
+  login$!:Observable<AuthState[]>
   error=null
   constructor(private fb:FormBuilder, private authentication:AuthenticationService, private auth :AuthService,
-    private router:Router, private store: Store
+    private router:Router, private store:Store<AuthState>
     ){
 
   }
@@ -28,20 +31,34 @@ export class LoginComponent implements OnInit {
       Email:[null, [Validators.required, Validators.email]],
       Password:[null, Validators.required]
     })
+   
+    // this.store.dispatch(login({email:this.form.value.email,password:this.form.value.password}))
+  //   this.store.dispatch(login(this.form.value))
+  //   this.store.select('userl')
+  //  this.store.select('userl').subscribe(state=>{
+  //   console.log(state);
+    
+  // })
+    // this.login$ = this.store.select(login(email:this.form.value.email,password:this.form.value.password))
   }
 
   submitForm(){
     this.authentication.loginUser(this.form.value).subscribe(response=>{
       this.auth.setRole(response.role)
       this.auth.setName(response.name)
-      this.onLogin(this.form.value.email, this.form.value.password)
+      this.auth.login()
       localStorage.setItem('token', response.token)
       if(response.token){
+        
         this.router.navigate(['book'])
       }
     },(error)=>{
     this.error=error.error.error
     })
+    this.store.dispatch(login({userlogged:this.form.value}))
+    console.log(this.form.value)
+    // this.store.select('userl')
+   
   }
 
   Close(){
@@ -49,9 +66,9 @@ export class LoginComponent implements OnInit {
   }
 
   //login with state
-  onLogin(email: string, password: string) {
-    this.store.dispatch(login({ email, password }));
-  }
+  // onLogin(email: string, password: string) {
+  //   this.store.dispatch(login({ email, password }));
+  // }
 
   // logout with state
   onLogout() {

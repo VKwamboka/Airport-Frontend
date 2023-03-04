@@ -37,9 +37,9 @@ getRole(){
     return promise;
   }
 
-  // login(){
-  //   this.isLoggedIn=true
-  // }
+  login(){
+    this.isLoggedIn=true
+  }
 
   logout(){
     this.isLoggedIn=false;

@@ -1,11 +1,13 @@
-import { User } from "../Interfaces";
+import { LoginSuccess, User } from "../Interfaces";
 
 export interface AuthState {
     isLoggedIn: boolean
     loading: false
-    user: User | null
+    user: LoginSuccess | null
     errorMessage: string | null
   }
+
+  
   
   export const initialAuthState: AuthState = {
     isLoggedIn: false,
@@ -14,9 +16,10 @@ export interface AuthState {
     errorMessage: null,
   };
 
-  export interface UserState {
-    user: User | null;
-    loading: boolean;
-    error: any;
-  }
+  // export interface UserState {
+  //   user: User | null;
+  //   loading: boolean;
+  //   error: any;
+  // }
+  
   

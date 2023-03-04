@@ -11,6 +11,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { bookingReducer } from './State/Reducers/bookingReducer';
 import { BookingsEffect } from './State/Effects/BookingEffects';
+import { authReducer } from './Auth/authReducer';
+import { AuthEffects } from './Auth/authEffects';
 
 
 
@@ -22,9 +24,9 @@ import { BookingsEffect } from './State/Effects/BookingEffects';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({sample:sampleReducer, counter:CounterReducer, booking:bookingReducer}),
+    StoreModule.forRoot({sample:sampleReducer, counter:CounterReducer, booking:bookingReducer, userl:authReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([BookingsEffect])
+    EffectsModule.forRoot([BookingsEffect, AuthEffects])
   ],
   providers: [{provide:HTTP_INTERCEPTORS, useClass:TokenInterceptorService, multi:true}],
   bootstrap: [AppComponent]
