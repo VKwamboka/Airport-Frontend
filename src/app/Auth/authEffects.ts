@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, exhaustMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
-
+import * as UserActions from './authAction'
 import { login, loginSuccess, loginFailure } from './authAction';
 import { LoginSuccess, LoginUser, User } from '../Interfaces';
 import { AuthenticationService } from '../Services/authentication.service';
@@ -27,6 +27,21 @@ export class AuthEffects {
   }
    
   );
+
+  // update user
+  updateUser= createEffect(()=>{
+    return this.actions$.pipe(
+        ofType(UserActions.updateUserProfile),
+        concatMap(action=>{
+            return  this.authService.updateUser(action.user.Email,action.user).pipe(
+                map(successresponse=>{
+                    return UserActions.updateUserProfileSuccess({user:successresponse})
+                }),
+                catchError(error=>of(UserActions.updateUserProfileFailure(error.error.message)))
+            )
+        })
+    )
+})
 }
 
 

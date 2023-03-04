@@ -6,6 +6,7 @@ const routes: Routes = [
   {path:'', loadComponent:()=>import('./home/home.component').then(c=>c.HomeComponent)},
   {path:'register', loadComponent:()=>import('./Auth/register/register.component').then(c=>c.RegisterComponent)},
   {path:'login',  loadComponent:()=>import('./Auth/login/login.component').then(c=>c.LoginComponent)},
+  {path:'update',  loadComponent:()=>import('./profile/edit-profile/edit-profile.component').then(c=>c.EditProfileComponent)},
   {path:'book',  loadComponent:()=>import('./Bookings/booking/booking.component').then(c=>c.BookingComponent)},
   {path:'book/:id', canActivate:[AuthGuardService], loadComponent:()=>import('./Bookings/single-booking/single-booking.component').then(c=>c.SingleBookingComponent)},
   {path:'book/:id/edit', canActivate:[AuthGuardService], loadComponent:()=>import('./Bookings/update-booking/update-booking.component').then(c=>c.UpdateBookingComponent)},

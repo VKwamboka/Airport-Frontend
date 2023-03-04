@@ -9,6 +9,7 @@
     <a *ngIf="!auth.isLoggedIn" routerLink="register">Register</a>
     <a *ngIf="auth.isLoggedIn" >Welcome {{auth.getName()}}</a>
     <a *ngIf="auth.isLoggedIn" (click)="auth.logout()" routerLink="">Logout</a>
+    <a *ngIf="auth.isLoggedIn" (click)="ShowMore()"  routerLink="">Show Profile</a>
   </div>
   </div>
 <router-outlet></router-outlet>

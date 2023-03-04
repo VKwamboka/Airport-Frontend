@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { AuthState, initialAuthState } from './authState';
 import { loginSuccess, loginFailure, logout, login, updateUserProfileSuccess } from  './authAction'
+import { User } from '../Interfaces';
 
 export const authReducer = createReducer<AuthState>(
   initialAuthState,
@@ -17,11 +18,25 @@ export const authReducer = createReducer<AuthState>(
     user: null,
     errorMessage:actions.errorMessage,
   })),
+  on(updateUserProfileSuccess,(state,action):AuthState=>{
+
+    const updatedUser=state.user
+
+    return{
+        ...state,
+        errorMessage:'',
+        user:updatedUser
+    }
+ }),
+  
+  on(logout, () => initialAuthState),
+);
+
+//  export const UPdateReducer = createReducer<User>(
+//   initialAuthState,
 //   on(updateUserProfileSuccess,(state,action):AuthState=>{
 
-//     const updatedUser=state.user.(item=>{
-//         return item.Email===action.user.Email?action.user:item
-//     })
+//     const updatedUser=state.Loggeduser:User
 
 //     return{
 //         ...state,
@@ -29,5 +44,4 @@ export const authReducer = createReducer<AuthState>(
 //         user:updatedUser
 //     }
 //  }),
-  on(logout, () => initialAuthState),
-);
+//  )
