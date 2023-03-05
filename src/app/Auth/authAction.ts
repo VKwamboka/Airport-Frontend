@@ -7,7 +7,7 @@ export const loginSuccess = createAction('[User]Login Success', props<{loginSucc
 export const loginFailure = createAction('[User]Login Failure', props<{errorMessage: string}>());
 
 // update profile
-export const updateUserProfile = createAction('[User]Update Profile', props<{user: User}>());
+export const updateUserProfile = createAction('[User]Update Profile', props<{user: User, id:string}>());
 export const updateUserProfileSuccess = createAction('[User]Update Profile Success', props<{user: User}>());
 export const updateUserProfileFailure = createAction('[User]Update Profile Failure', props<{errorMessage: string}>());
 

@@ -24,7 +24,7 @@ import { AuthEffects } from './Auth/authEffects';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({sample:sampleReducer, counter:CounterReducer, booking:bookingReducer, userl:authReducer}),
+    StoreModule.forRoot({sample:sampleReducer, counter:CounterReducer, booking:bookingReducer, userl:authReducer, prof:authReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([BookingsEffect, AuthEffects])
   ],

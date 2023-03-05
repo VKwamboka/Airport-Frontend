@@ -12,16 +12,6 @@ export interface AuthState {
     errorMessage: string | null
   }
 
-  const userSliceState= createFeatureSelector<AuthState>('user')
-
-  export const profile= createSelector(userSliceState, state=>state.user)
-  const myId= createSelector(userSliceState, state=>state.Id)
-
-
-  export const getSingleUser=createSelector(profile,myId,(state)=>{
-      return state
-  })
-  
   export const initialAuthState: AuthState = {
     isLoggedIn: false,
     loading: false,
@@ -40,4 +30,15 @@ export interface AuthState {
     errorMessage: string | null
   }
   
+  const userSliceState= createFeatureSelector<AuthState>('prof')
+
+  export const profile= createSelector(userSliceState, state=>state.user)
+  const myId= createSelector(userSliceState, state=>state.Id)
+
+
+  export const getSingleUser=createSelector(profile,myId,(state)=>{
+      return state
+  })
+  
+ 
   
