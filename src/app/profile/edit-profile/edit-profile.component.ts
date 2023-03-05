@@ -16,13 +16,7 @@ import { User } from 'src/app/Interfaces';
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent {
-  // user: User ={
-  //   Name: '',
-  //   Email: '',
-  //   Password:'',
-  // }
- 
-  // updated = false
+
 
   show=false
   id!:string
@@ -36,20 +30,18 @@ export class EditProfileComponent {
     this.form = this.fb.group({
       Name:[null, Validators.required],
       Email:[null, [Validators.required, Validators.email]],
-      Password:[null, Validators.required]
+     
     })
 
-    this.route.params.subscribe((param:Params)=>{
-      this.id=param['Id']
-      })
 
       this.store.select(getSingleUser).subscribe(res=>{
         if(res){    
+          this.id = res.id
           console.log(res)     
           this.form.setValue({
             Name:res.name,
             Email:res.email,
-            Password:res.password
+            
         })
         }
       })

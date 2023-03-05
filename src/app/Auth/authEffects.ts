@@ -33,7 +33,7 @@ export class AuthEffects {
     return this.actions$.pipe(
         ofType(UserActions.updateUserProfile),
         concatMap(action=>{
-            return  this.authService.updateUser(action.user.Email,action.user).pipe(
+            return  this.authService.updateUser(action.id,action.user).pipe(
                 map(successresponse=>{
                     return UserActions.updateUserProfileSuccess({user:successresponse})
                 }),

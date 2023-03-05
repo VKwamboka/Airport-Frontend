@@ -20,6 +20,7 @@ export interface LoginSuccess{
     role:string
     name:string
     email:string
+    id:string
     password:string
 }
 
